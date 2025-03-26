@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "359907113729",
+    "project_id": "cobros-91ca7",
+    "storage_bucket": "cobros-91ca7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359907113729:android:c968c5212577f00ca6b900",
+        "android_client_info": {
+          "package_name": "com.example.cobros"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIcMV_ZBk0SMLrDskhtdHmJVgOy0eohlE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
