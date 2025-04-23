@@ -16,7 +16,7 @@ class PaymentsMadePage extends StatelessWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/cobrador');
+              Navigator.pushReplacementNamed(context, '/cobro');
             },
           ),
         ),

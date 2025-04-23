@@ -12,9 +12,7 @@ class AdminPage extends StatelessWidget {
           builder: (context) {
             return AlertDialog(
               title: const Text('Cerrar Sesión'),
-              content: const Center(
-                child: Text('¿Seguro que quieres cerrar sesión?'),
-              ),
+              content: const Text('¿Seguro que quieres cerrar sesión?'),
               actions: [
                 TextButton(
                   onPressed: () {

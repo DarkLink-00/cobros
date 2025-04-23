@@ -11,8 +11,8 @@ class CobroPage extends StatelessWidget {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Center(child: Text('Cerrar Sesión')),
-              content: const Center(child: Text('¿Seguro de Cerrar Sesión?')),
+              title: const Text('Cerrar Sesión'),
+              content: const Text('¿Seguro de Cerrar Sesión?'),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -54,7 +54,7 @@ class CobroPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(),
-              Card(
+              /*Card(
                 elevation: 4,
                 child: ListTile(
                   leading: const Icon(Icons.receipt_long, size: 40),
@@ -65,7 +65,7 @@ class CobroPage extends StatelessWidget {
                     Navigator.pushReplacementNamed(context, '/payments');
                   },
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

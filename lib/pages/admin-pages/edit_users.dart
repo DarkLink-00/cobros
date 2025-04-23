@@ -81,39 +81,64 @@ class _EditUsersPageState extends State<EditUsersPage> {
     }
   }
 
+  Future<bool> _onWillPop() async {
+    return await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('¿Salir sin guardar?'),
+            content: const Text('Los cambios no gardados se perderán'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('Cancelar'),
+              ),
+              TextButton(
+                onPressed: () =>
+                    Navigator.pushReplacementNamed(context, '/manageUsers'),
+                child: const Text('Salir'),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Editar Usuario')),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _buildReadOnlyField('Correo', _correo),
-                    const SizedBox(height: 12),
-                    _buildPasswordField(),
-                    const SizedBox(height: 12),
-                    _buildTextField(_nombreController, 'Nombre'),
-                    const SizedBox(height: 12),
-                    _buildTextField(_ubicacionController, 'Ubicacion'),
-                    const SizedBox(height: 12),
-                    _buildTextField(_negocioController, 'Negocio'),
-                    const SizedBox(height: 12),
-                    _buildDropdownField(),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _guardarCambios,
-                      child: const Text('Guardar Cambios'),
-                    ),
-                  ],
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(title: Text('Editar Usuario')),
+        body: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _buildReadOnlyField('Correo', _correo),
+                      const SizedBox(height: 12),
+                      _buildPasswordField(),
+                      const SizedBox(height: 12),
+                      _buildTextField(_nombreController, 'Nombre'),
+                      const SizedBox(height: 12),
+                      _buildTextField(_ubicacionController, 'Ubicacion'),
+                      const SizedBox(height: 12),
+                      _buildTextField(_negocioController, 'Negocio'),
+                      const SizedBox(height: 12),
+                      _buildDropdownField(),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        onPressed: _guardarCambios,
+                        child: const Text('Guardar Cambios'),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
+      ),
     );
   }
 
