@@ -47,6 +47,5 @@ class MyApp extends StatelessWidget {
         '/clientPayments': (context) => const ClientPaymentsPage(),
       },
     );
-    //MultiProvider(providers: [ChangeNotifierProvider(create: (_)=> AuthService())],);
   }
 }
