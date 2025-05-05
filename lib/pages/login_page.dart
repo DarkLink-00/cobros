@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.pushReplacementNamed(context, '/cobro');
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Rol de usuario no valido')),
+              const SnackBar(content: Text('Rol de usuario no válido')),
             );
           }
         } else {
@@ -55,29 +55,29 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _showNotAvailable(BuildContext context) {
+  /*void _showNotAvailable(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Funcionalidad no Disponible'),
-          content: const Text('Esta funcionalidad aún no esta disponible'),
+          content: const Text('Esta funcionalidad aún no está disponible'),
           actions: [
             TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: () => Navigator.pop(context),
               child: const Text('Cerrar'),
             ),
           ],
         );
       },
     );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -91,53 +91,40 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Logo o encabezado
-                  const Center(
+                  Center(
                     child: Text(
                       'Iniciar Sesión',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      style: theme.textTheme.titleLarge,
                     ),
                   ),
                   const SizedBox(height: 24),
-                  // Campo de correo electrónico
                   CustomTextField(
-                    labelText: 'Correo Electrónico',
-                    isPassword: false,
-                    controller: _correoControl,
-                  ),
+                      labelText: 'Correo Electrónico',
+                      isPassword: false,
+                      controller: _correoControl),
                   const SizedBox(height: 16),
-                  // Campo de contraseña
                   CustomTextField(
-                    labelText: 'Contraseña',
-                    isPassword: true,
-                    controller: _passwordControl,
-                  ),
-                  const SizedBox(height: 24),
-                  // Botón de inicio de sesión
+                      labelText: 'Contraseña',
+                      isPassword: true,
+                      controller: _passwordControl),
+                  const SizedBox(height: 50),
                   CustomElevatedButton(
-                    text: 'Iniciar Sesión',
-                    color: Colors.blue,
-                    icon: Icons.login,
-                    onPressed: _signInWithEmailAndPassword,
-                    //() => Navigator.pushReplacementNamed(context, '/admin'),
-                  ),
+                      text: 'Iniciar Sesión',
+                      color: theme.primaryColor,
+                      icon: Icons.login,
+                      onPressed: _signInWithEmailAndPassword),
+                  /*const SizedBox(height: 16),
+                  CustomElevatedButton(
+                      text: 'Iniciar Sesión con Google',
+                      color: Colors.grey,
+                      icon: Icons.g_mobiledata,
+                      onPressed: () => _showNotAvailable(context)),
                   const SizedBox(height: 16),
-                  // Botón de inicio de sesión con Google
                   CustomElevatedButton(
-                    text: 'Iniciar Sesión con Google',
-                    color: Colors.grey,
-                    icon: Icons.g_mobiledata,
-                    onPressed: () => _showNotAvailable(context),
-                  ),
-                  const SizedBox(height: 16),
-                  // Botón de inicio de sesión con Facebook
-                  CustomElevatedButton(
-                    text: 'Iniciar Sesión con Facebook',
-                    color: Colors.blueGrey,
-                    icon: Icons.facebook,
-                    onPressed: () => _showNotAvailable(context),
-                  ),
+                      text: 'Iniciar Sesión con Facebook',
+                      color: Colors.blueGrey,
+                      icon: Icons.facebook,
+                      onPressed: () => _showNotAvailable(context)),*/
                 ],
               ),
             ),
@@ -148,18 +135,16 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-// Widget personalizado para los campos de texto
 class CustomTextField extends StatelessWidget {
   final String labelText;
   final bool isPassword;
   final TextEditingController controller;
 
-  const CustomTextField({
-    required this.labelText,
-    required this.isPassword,
-    required this.controller,
-    super.key,
-  });
+  const CustomTextField(
+      {required this.labelText,
+      required this.isPassword,
+      required this.controller,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -167,29 +152,26 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         labelText: labelText,
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
       ),
       obscureText: isPassword,
     );
   }
 }
 
-// Widget personalizado para los botones elevados
 class CustomElevatedButton extends StatelessWidget {
   final String text;
   final Color color;
   final IconData icon;
   final VoidCallback onPressed;
 
-  const CustomElevatedButton({
-    required this.text,
-    required this.color,
-    required this.icon,
-    required this.onPressed,
-    Key? key,
-  }) : super(key: key);
+  const CustomElevatedButton(
+      {required this.text,
+      required this.color,
+      required this.icon,
+      required this.onPressed,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

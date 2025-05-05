@@ -12,23 +12,49 @@ import 'package:cobros/pages/cobrador_page.dart';
 import 'package:cobros/pages/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-//import 'package:provider/provider.dart';
+import 'package:camera/camera.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  await initializeDateFormatting();
+  final cameras = await availableCameras();
+  runApp(MyApp(cameras: cameras));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final List<CameraDescription> cameras;
+
+  const MyApp({super.key, required this.cameras});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Color(0xFFA83F50),
+        scaffoldBackgroundColor: Color(0xFFF5E6CA),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFA83F50),
+          foregroundColor: Colors.white,
+        ),
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(color: Colors.black87, fontSize: 18),
+          bodyMedium: TextStyle(color: Colors.black54, fontSize: 16),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xFFA83F50),
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+            ),
+          ),
+        ),
+      ),
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginPage(),
@@ -39,7 +65,7 @@ class MyApp extends StatelessWidget {
         '/registPayments': (context) => const RegisterPaymentsPage(),
         // rama del cobrador
         '/cobro': (context) => const CobroPage(),
-        '/scanQR': (context) => const ScanQRPage(),
+        '/scanQR': (context) => ScanQRPage(cameras: cameras),
         '/payments': (context) => const PaymentsMadePage(),
         // rama del cliente del local
         '/client': (context) => const ClientePage(),
